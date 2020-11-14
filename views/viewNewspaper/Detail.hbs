@@ -1,0 +1,192 @@
+{{#section 'css'}}
+{{!-- Owl Carousel --}}
+<link rel="stylesheet" href="../../public/css/detail.css">
+<link rel="stylesheet" href="../../public/css/list_cat_tag.css">
+{{/section}}
+<div class="container mt-2">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8 text-justify">
+      <!-- Blog Detail -->
+      <div class="blog-detail">
+        {{#each this.News}}
+        <h3 class="mt-2">
+          {{{Title}}}
+        </h3>
+        {{/each}}
+        <span class="most_fh5co_treding_font_123">Tác giả: </span>
+        <span href="#" class="most_fh5co_treding_font_123 d-inline-block">
+          {{this.author}}
+        </span>
+        {{#each this.News}}
+        <span class="">
+          <span class="most_fh5co_treding_font_123">-</span>
+
+          <span class="most_fh5co_treding_font_123">
+            <i class="fa fa-clock-o m-1" aria-hidden="true"></i>
+            {{Day}}
+          </span>
+        </span>
+
+        <span class="most_fh5co_treding_font_123">
+          <i class="fa fa-eye m-1" aria-hidden="true"></i>
+          {{View}}
+        </span>
+
+        <div id="content" class="text-justify">
+          {{{Content}}}
+        </div>
+        {{/each}}
+
+        <!-- Tag -->
+        <div class="d-flex align-items-center">
+          <span class="mr-3">
+            Thẻ:
+          </span>
+          {{#each this.listTags}}
+          <div class="recommend-tag">
+            <a href="/Tags/{{IDTags}}" class="fh5co_tagg">
+              {{TagName}}
+            </a>
+          </div>
+          {{/each}}
+        </div>
+
+        <!-- Share -->
+        <div class="d-flex align-items-center mb-3">
+          <span class="mr-3">
+            Chia sẻ:
+          </span>
+
+          <div class="">
+            <a href="#" class="fh5co_tagg bg-facebook">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+              Facebook
+            </a>
+
+            <a href="#" class="fh5co_tagg bg-twitter">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+              Twitter
+            </a>
+
+            <a href="#" class="fh5co_tagg bg-google">
+              <i class="fa fa-google-plus" aria-hidden="true"></i>
+              Google+
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Leave a comment -->
+      <div id="Comment">
+        <h4 class="Comment">
+          Bình luận bài viết
+        </h4>
+
+        <form method="POST" class="form-comment mt-3 d-flex flex-column" id="frmComment" onsubmit="return validationComment">
+          <textarea name="Comment" placeholder="Comment..."></textarea>
+          <button class="btn btn-success mt-2 mb-2" type="submit">
+            Đăng
+          </button>
+        </form>
+      </div>
+      <h3 class="pt-3 pb-3">Những bình luận cũ</h3>
+
+      {{!-- View comment --}}
+      {{#each this.comments}}
+      <div class="container pb-5">
+        <div class="row">
+          <div class="col-sm-3 d-flex align-items-center justify-content-center">
+            <img src="../../public/images-upload/{{Avatar}}" class="avatar-comment" alt="">
+          </div>
+          <div class="col-sm-9 d-flex justify-content-start comment-content flex-wrap flex-row">
+            <div class="pl-2 pt-2 w-100 d-flex justify-content-between">
+              <div class="username">
+                {{Name}}
+              </div>
+              <div class="time">
+                {{Time}}
+              </div>
+            </div>
+            <div class="w-100 pl-2 pt-1">{{Comment}}</div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-md-10 col-lg-4">
+      <!-- Category -->
+      <div id="Category">
+        <h3 class="category-title py-2 mb-4">
+          Danh Mục
+        </h3>
+
+        <ul class="menu-category">
+          {{#each this.listCat}}
+          <li class="menu-category-item">
+            <a href="/Category/{{CatID}}" class="d-block">
+              {{CatName}}
+            </a>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{!--  --}}
+      <!-- Popular Posts -->
+      <div class="p-b-30">
+        <h3 class="category-title pt-3 py-2 mb-4">
+          Phổ Biến
+        </h3>
+
+        <ul class="p-t-35">
+          {{#each this.listNewsByCat}}
+          <li class="row pb-3">
+            <div class="col-sm-4 newsbycat-img-size">
+              <a href="/news/{{IDPage}}" class="d-block w-100 h-100">
+                <img src="{{ImgAvatar}}" class="fit-img" alt="Image title">
+              </a>
+            </div>
+
+            <div class="col-sm-8">
+              <div class="paddding">
+                <a href="/news/{{IDPage}}">
+                  <div class="most_fh5co_treding_font popular-title-detail-size">{{Title}}</div>
+                </a>
+
+                <span class="cl8 txt-center p-b-24">
+                  <a href="#" class="most_fh5co_treding_font_123">
+                    {{Tags}}
+                  </a>
+                </span>
+              </div>
+            </div>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <!-- Tag -->
+      <div id="Tags">
+        <h3 class="category-title py-2 mb-4">
+          Thẻ
+        </h3>
+
+        <div>
+          {{#each this.AllTags}}
+          <a href="/Tags/{{IDTags}}" class="fh5co_tagg">
+            {{TagName}}
+          </a>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#section 'js'}}
+{{!-- Validation --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+
+<script src="/public/assets/js/validation.js"></script>
+{{/section}}

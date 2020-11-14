@@ -1,0 +1,232 @@
+{{#section 'css'}}
+{{!-- Owl Carousel --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+<link rel="stylesheet" href="../public/css/home.css">
+{{/section}}
+
+<div class="container-fluid paddding mb-5">
+	<div class="row no-gutters">
+		<div class="col-12 col-md-6">
+			<div class="big-box">
+				<a href="/news/{{this.top1.IDPage}}" class="color_fff  d-block w-100 h-100">
+					<img src="{{this.top1.ImgAvatar}}" alt="img" class="fit-img" />
+					<div class="big-box-absolute"></div>
+					<div class="big-box-absolute-font">
+						<h6><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{this.top1.Day}}</h6>
+						<div class="premium-big">
+							{{#if this.top1.Premium}}
+							<a href="/news/{{this.top1.IDPage}}" class="premium"></a>
+							<i class="fa fa-star" aria-hidden="true"></i>
+				</a>
+				{{/if}}
+				<a href="/news/{{this.top1.IDPage}}" class="big-box-title">{{this.top1.Title}}
+				</a>
+			</div>
+		</div>
+		</a>
+	</div>
+</div>
+<div class="col-12 col-md-6">
+	<div class="big-box">
+		<div class="row no-gutters h-100">
+			{{#each this.topElse}}
+			<div class="col-md-6 col-6 h-50">
+				<div class="h-100">
+					<a href="/news/{{IDPage}}" class="color_fff d-block w-100 h-100">
+						<img src="{{ImgAvatar}}" alt="img" class="fit-img" />
+						<div class="big-box-absolute"></div>
+						<div class="small-box-absolute-font">
+							<h6><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{Day}}</h6>
+							<div>
+								{{#if Premium}}
+								<a href="/news/{{IDPage}}" class="premium"></a>
+								<i class="fa fa-star" aria-hidden="true"></i>
+					</a>
+					{{/if}}
+					<a href="/news/{{IDPage}}" class=" small-box-title">{{Title}}
+
+					</a>
+				</div>
+			</div>
+			</a>
+		</div>
+	</div>
+	{{/each}}
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="container-fluid pt-3">
+	<div class="container animate-box" data-animate-effect="fadeIn">
+		<div>
+			<div class="heading-news mb-4">Xem nhiều nhất</div>
+		</div>
+		<div id="carouselMostView" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				{{#each this.listMostView}}
+				<li data-target="#carouselMostView" data-slide-to="{{@index}}" {{#if @first}} class="active" {{/if}}>
+				</li>
+				{{/each}}
+			</ol>
+			<div class="carousel-inner">
+				{{#each this.listMostView}}
+				<div class="carousel-item {{#if @first}} active {{/if}}">
+					<a href="/news/{{IDPage}}">
+						<img class="color_fff d-block w-100 fit-img" src="{{ImgAvatar}}">
+						<div class="big-box-absolute"></div>
+					</a>
+					<div class="carousel-caption d-md-block">
+						<a class="link" href="/news/{{IDPage}}">
+							{{#if Premium}}
+								<a href="/news/{{IDPage}}" class="premium"></a>
+									<i class="fa fa-star" aria-hidden="true"></i>
+								</a>
+								{{/if}}
+							<a href="/news/{{IDPage}}" class="font-carousel">{{Title}}
+								
+							</a>
+						</a>
+						<h4 class=""><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{Day}}</h4>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+			<a class="carousel-control-prev" href="#carouselMostView" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselMostView" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid pt-3">
+	<div class="container animate-box" data-animate-effect="fadeIn">
+		<div>
+			<div class="heading-news mb-4">Mới nhất</div>
+		</div>
+		<div id="carouselMostNews" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				{{#each this.listMostNews}}
+				<li data-target="#carouselMostNews" data-slide-to="{{@index}}" {{#if @first}} class="active" {{/if}}>
+				</li>
+				{{/each}}
+			</ol>
+			<div class="carousel-inner">
+				{{#each this.listMostNews}}
+				<div class="carousel-item {{#if @first}} active {{/if}}">
+					<a href="/news/{{IDPage}}">
+						<img class="d-block w-100 fit-img" src="{{ImgAvatar}}">
+						<div class="big-box-absolute"></div>
+					</a>
+					<div class="carousel-caption d-md-block">
+						<a class="link" href="/news/{{IDPage}}">
+							{{#if Premium}}
+								<a href="/news/{{IDPage}}" class="premium"></a>
+									<i class="fa fa-star" aria-hidden="true"></i>
+								</a>
+								{{/if}}
+							<a href="/news/{{IDPage}}" class="font-carousel">{{Title}}
+								
+							</a>
+						</a>
+						<h4 class="color_fff"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{Day}}</h4>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+			<a class="carousel-control-prev" href="#carouselMostNews" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselMostNews" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="container-fluid pt-3 mb-3">
+	<div class="container animate-box" data-animate-effect="fadeIn">
+		<div>
+			<div class="heading-news mb-4">Mới nhất mỗi danh mục</div>
+		</div>
+		<div id="carouselTop1NewsEachCat" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				{{#each this.listTop1NewsEachCat}}
+				<li data-target="#carouselTop1NewsEachCat" data-slide-to="{{@index}}" {{#if @first}} class="active"
+					{{/if}}></li>
+				{{/each}}
+			</ol>
+			<div class="carousel-inner">
+				{{#each this.listTop1NewsEachCat}}
+				<div class="carousel-item {{#if @first}} active {{/if}}">
+					<a href="/news/{{IDPage}}">
+						<img class="d-block w-100 fit-img" src="{{ImgAvatar}}">
+						<div class="big-box-absolute"></div>
+					</a>
+					<div class="carousel-caption d-md-block">
+						<a class="link" href="/news/{{IDPage}}">
+							{{#if Premium}}
+								<a href="/news/{{IDPage}}" class="premium"></a>
+									<i class="fa fa-star" aria-hidden="true"></i>
+								</a>
+								{{/if}}
+							<a href="/news/{{IDPage}}" class="font-carousel">{{Title}}
+								
+							</a>
+						</a>
+						<h4 class="color_fff"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{Day}}</h4>
+					</div>
+				</div>
+				{{/each}}
+			</div>
+			<a class="carousel-control-prev" href="#carouselTop1NewsEachCat" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carouselTop1NewsEachCat" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+</div>
+
+{{#section 'js'}}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"></script>
+<script>
+	$(".owl-carousel").owlCarousel({
+		loop: true,
+		margin: 10,
+		nav: true,
+		navText: [
+			"<i class='fa fa-caret-left'></i>",
+			"<i class='fa fa-caret-right'></i>"
+		],
+		autoplay: true,
+		autoplayHoverPause: true,
+		responsive: {
+			0: {
+				items: 1
+			},
+			600: {
+				items: 3
+			},
+			1000: {
+				items: 5
+			}
+		}
+	});
+
+</script>
+{{/section}}

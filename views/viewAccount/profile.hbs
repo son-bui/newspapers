@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/public/assets/css/profile.css">
+  <link rel="stylesheet" href="/public/css/style_1.css">
+  {{!-- Bootstrap --}}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  {{!-- Font --}}
+  <link href="https://fonts.googleapis.com/css?family=Playfair+Display|Poppins|Roboto+Slab|Work+Sans&display=swap"
+    rel="stylesheet">
+  {{!-- Font awesome --}}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Profile</title>
+</head>
+
+<body>
+  {{!-- Top bar--}}
+  <div class="container-fluid border-bottom top-bar-desktop">
+    <div class="container h-100 d-flex justify-content-around align-items-center pt-3 pb-3 flex-wrap">
+      <div class="left-top-bar d-flex align-items-center justify-content-between">
+        <a href="/">
+          <img src="/public/images/logo.png" class="img-logo" alt="">
+        </a>
+      </div>
+
+      <div class="right-top-bar">
+        <form action="/Account/Logout" id="frmLogout" method="POST"></form>
+        {{#if lcIsAuthenticated}}
+        <div class="dropdown pl-2">
+          <button class="btn btn-account dropdown-toggle text-dark" style="background: none; color: #ccc" type="button"
+            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="/public/images-upload/{{lcAuthUser.Avatar}}" class="avatar" alt="">
+            {{lcAuthUser.Name}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/Account/Profile">Hồ sơ</a>
+            {{!--Writer--}}
+            {{#if Writer}}
+            <a class="dropdown-item" href="/writer/new">Thêm tin mới</a>
+            {{/if}}
+            {{!--Edior--}}
+            {{#if Editor}}
+            <a class="dropdown-item" href="/editor">Quản lý bài viết</a>
+            <a class="dropdown-item" href="/accpet">Bài viết đã xử lí</a>
+            {{/if}}
+            {{!--Admin--}}
+            {{#if Admin}}
+            <a class="dropdown-item" href="/admin">Quản lí</a>
+            {{/if}}
+            {{!-- Subscriber--}}
+            {{#if Subscriber}}
+            <a class="dropdown-item" href="/pricing">Tài khoản</a>
+            {{/if}}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript: $('#frmLogout').submit()">Đăng xuất</a>
+          </div>
+        </div>
+        {{else}}
+
+        <a href="/Account/Sign-Up" class="top-bar-item">
+          Đăng kí
+        </a>
+
+        <a href="/Account/Sign-In" class="top-bar-item">
+          Đăng nhập
+        </a>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+  {{!-- Body content--}}
+  <div class="container mt-4 d-flex justify-content-center">
+    <div class="top-body-content h-100">
+      <div class="avatar-user-circle d-flex m-auto position-relative">
+        <a href="/account/change-avatar" class="d-block">
+          <div class="overlay">
+            <div class="overlay-content">
+              <i class="fa fa-camera" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div class="avatar-circle">
+            <img src="/public/images-upload/{{lcAuthUser.Avatar}}" width="100%" height="100%" alt="">
+          </div>
+        </a>
+      </div>
+      <form method="POST" class="mt-3" id="frmEditProfile" onsubmit="return validationEditProfile">
+        <p class="content-title">Hồ Sơ</p>
+        <div class="mb-3">
+          <p class="content-text-about">
+            <i class="fa fa-user mr-2" aria-hidden="true"></i>
+            {{lcAuthUser.Name}}
+          </p>
+          {{#if lcAuthUser.Alias}}
+          <p class="content-text-about">
+            <i class="fa fa-pencil-square mr-2" aria-hidden="true"></i>
+            {{lcAuthUser.Alias}}
+          </p>
+          {{/if}}
+          <p class="content-text-about">
+            <i class="fa fa-envelope mr-2" aria-hidden="true"></i>
+            {{lcAuthUser.Email}}
+          </p>
+          <p class="content-text-about">
+            <i class="fa fa-calendar mr-2" aria-hidden="true"></i>
+            {{this.DOB}}
+          </p>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mt-5 flex-row flex-wrap">
+          <a href="/account/profile/change-password" class="rounded border-0 btn-change-pass">Thay đổi mật khẩu</a>
+          <a href="/account/profile/edit" class="rounded border-0 btn-edit">Chỉnh sửa</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  {{!-- Script --}}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  {{!-- Bootstrap --}}
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  {{!-- Validation --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+  <script src="../public/assets/js/validation.js"></script>
+</body>
+
+</html>

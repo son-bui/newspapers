@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>24 NEWS</title>
+
+  {{{_sections.css}}}
+
+  {{!-- Home css --}}
+  <link href="../../public/css/main.css" rel="stylesheet" type="text/css" />
+  
+  {{!-- Media query --}}
+  <link href="../../public/css/media_query.css" rel="stylesheet" type="text/css" />
+  {{!-- Font awesome --}}
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  {{!-- Animate CSS --}}
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.0/animate.css" rel="stylesheet" type="text/css" />
+  {{!-- Font --}}
+  <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+  {{!-- Default CSS --}}
+  <link rel="stylesheet" href="../../public/css/detail.css">
+  <link rel="stylesheet" href="../../public/css/style_1.css" type="text/css" />
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- Modernizr JS -->
+
+</head>
+
+<body>
+  {{!-- Header --}}
+  {{!-- Topbar --}}
+  <div class="container-fluid top-bar border-bottom">
+    <div class="container d-flex justify-content-between align-items-center pt-3 pb-3 flex-wrap">
+      <div class="left-topbar">
+        <a href="/" class="d-block">
+          <img src="/public/images/logo.png" alt="img" class="top-bar-logo">
+        </a>
+      </div>
+
+      <div class="right-topbar">
+        <form action="/Account/Logout" id="frmLogout" method="POST"></form>
+        {{#if lcIsAuthenticated}}
+        <div class="dropdown pl-2">
+          <button class="btn btn-account dropdown-toggle" style="background: none;" type="button"
+            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="/public/images-upload/{{lcAuthUser.Avatar}}" class="avatar" alt="">
+            {{lcAuthUser.Name}} 
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/Account/Profile">Hồ sơ</a>
+            {{!--Writer--}}
+            {{#if Writer}}
+            <a class="dropdown-item" href="/writer/new">Thêm tin mới</a>
+            {{/if}}
+            {{!--Edior--}}
+            {{#if Editor}}
+            <a class="dropdown-item" href="/editor">Quản lý bài viết</a>
+            <a class="dropdown-item" href="/accpet">Bài viết đã xử lí</a>
+            {{/if}}
+            {{!--Admin--}}
+            {{#if Admin}}
+            <a class="dropdown-item" href="/admin">Quản lí</a>
+            {{/if}}
+            {{!-- Subscriber--}}
+            {{#if Subscriber}}
+              <a class="dropdown-item" href="/pricing">Tài khoản</a>
+            {{/if}}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="javascript: $('#frmLogout').submit()">Đăng xuất</a>
+          </div>
+        </div>
+        {{else}}
+
+        <a href="/Account/Sign-Up" class="topbar-item border-right">
+          Đăng kí
+        </a>
+
+        <a href="/Account/Sign-In" class="topbar-item">
+          Đăng nhập
+        </a>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  {{!-- Logo --}}
+  <div class="container-fluid pt-3 pb-3">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4 fh5co_padding_menu">
+          <form class="search-form my-2 my-lg-0" method="GET" action="/Category/search">
+            <input class="form-control mr-sm-2" type="text" name="Search" placeholder="Search">
+            <button class="btn bg-secondary rounded-0" type="submit">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
+        <div class="col-12 col-md-8 align-self-center fh5co_mediya_right">
+          <div class="text-center d-inline-block">
+            <a class="fh5co_display_table">
+              <div class="fh5co_verticle_middle"><i class="fa fa-linkedin"></i></div>
+            </a>
+          </div>
+          <div class="text-center d-inline-block">
+            <a class="fh5co_display_table">
+              <div class="fh5co_verticle_middle"><i class="fa fa-google-plus"></i></div>
+            </a>
+          </div>
+          <div class="text-center d-inline-block">
+            <a class="fh5co_display_table">
+              <div class="fh5co_verticle_middle"><i class="fa fa-twitter"></i></div>
+            </a>
+          </div>
+          <div class="text-center d-inline-block">
+            <a  class="fh5co_display_table">
+              <div class="fh5co_verticle_middle"><i class="fa fa-facebook"></i></div>
+            </a>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{!-- Menu --}}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        Trang chủ
+      </a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Tin Tức Nóng</a>
+            <div class="hide-menu sub-menu">
+              <div class="row">
+                {{#each lcHotNews}}
+                <div class="col-sm-3">
+                  <div class="h-100">
+                    <a href="/news/{{IDPage}}" class="d-block menu-img-size">
+                      <img src="{{ImgAvatar}}" class="fit-img" alt="Image title">
+                    </a>
+                    <div class="sub-menu-item-content">
+                      <a href="/news/{{IDPage}}">
+                        {{Title}}
+                      </a>
+                      <p class="content-option">
+                        <a href="/category/{{CatID}}">{{CatID}}</a>
+                        <span>-</span>
+                        <span>{{Day}}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/Category/3">Hải Sản</a>
+            <div class="sub-menu">
+              <div class="row">
+                {{#each lcSeafood}}
+                <div class="col-sm-3">
+                  <div class="h-100">
+                    <a href="/news/{{IDPage}}" class="d-block menu-img-size">
+                      <img src="{{ImgAvatar}}" class="fit-img" alt="Image title">
+                    </a>
+                    <div class="sub-menu-item-content">
+                      <a href="/news/{{IDPage}}">
+                        {{Title}}
+                        {{#if Premium}}
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        Premium
+                        {{/if}}
+                      </a>
+                      <p class="content-option">
+                        <a href="/category/{{CatID}}">{{CatID}}</a>
+                        <span>-</span>
+                        <span>{{Day}}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/Category/2">Nông Sản</a>
+            <div class="sub-menu">
+              <div class="row">
+                {{#each lcAgricultural}}
+                <div class="col-sm-3">
+                  <div class="h-100">
+                    <a href="/news/{{IDPage}}" class="d-block menu-img-size">
+                      <img src="{{ImgAvatar}}" class="fit-img" alt="Image title">
+                    </a>
+                    <div class="sub-menu-item-content">
+                      <a href="/news/{{IDPage}}">
+                        {{Title}}
+                      </a>
+                      <p class="content-option">
+                        <a href="/category/{{CatID}}">{{CatID}}</a>
+                        <span>-</span>
+                        <span>{{Day}}</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Kinh Doanh
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {{#each lcChildBusiness}}
+              <a class="dropdown-item" href="/category/{{CatID}}">{{CatName}}</a>
+              {{/each}}
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Khoáng Sản
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              {{#each lcChildMineral}}
+              <a class="dropdown-item" href="/category/{{CatID}}">{{CatName}}</a>
+              {{/each}}
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Liên Hệ
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/About">Giới Thiệu</a>
+              <a class="dropdown-item" href="/Contact">Liên Hệ</a>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </nav>
+
+  {{!-- Body --}}
+  {{{body}}}
+
+  {{!-- Footer --}}
+  {{!-- Top Footer --}}
+  <div class="container-fluid fh5co_footer_bg pb-3">
+    <div class="container animate-box">
+      <div class="row">
+        <div class="col-12 spdp_right py-5"><img src="/public/images/white_logo.png" alt="img"
+            class="footer_logo" /></div>
+        <div class="clearfix"></div>
+        <div class="col-12 col-md-4 col-lg-4">
+          <div class="footer_main_title py-3"> Giới Thiệu</div>
+          <div class="footer_sub_about pb-3"> Nhóm số 6 môn Lập trình web 2.
+            <ul class="footer_menu">
+              <li>1760220 - Phạm Quang Trung</li>
+              <li>1760271 - Phan Thế Công</li>
+              <li>1760287 - Nguyễn Hữu Đức</li>
+              <li>1760290 - Nguyễn Thanh Dương</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-md-4 col-lg-4">
+          <div class="footer_main_title py-3"> Danh mục</div>
+          <ul class="footer_menu">
+            {{#each this.lcFooterCat}}
+            <li><a href="/category/{{CatID}}" class=""><i class="fa fa-angle-right"></i>&nbsp;&nbsp; {{CatName}}</a>
+            </li>
+            {{/each}}
+          </ul>
+        </div>
+
+        <div class="col-12 col-md-4 col-lg-4 position_footer_relative">
+          <div class="footer_main_title py-3"> Bài viết được xem nhiều nhất</div>
+          {{#each this.listMostViewFooter}}
+          <div class="footer_makes_sub_font">
+            <div class="color_fff"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;{{Day}}
+            </div>
+            <div class=""><a href="/news/{{IDPage}}" class="footer_post pb-4">{{Title}}</a></div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+      <div class="row justify-content-center pt-2 pb-4">
+        <div class="col-12 col-md-8 col-lg-7 ">
+          <form method="POST" class="form-subscribe d-flex">
+            <input type="text" class="form-control subscribe-input" placeholder="Enter your email..."
+              aria-describedby="basic-addon1">
+            <button type="submit"> <i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;Đăng ký</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{!-- Bottom Footer --}}
+  <div class="container-fluid fh5co_footer_right_reserved">
+    <div class="container ">
+        <div class="col-12 text-center py-4 Reserved "> © Copyright 2020, All rights reserved. Design by <a
+            href="/About">Team 6 Web2</a>. </div>
+    </div>
+  </div>
+
+
+  {{!-- Script --}}
+  <script src="js/modernizr-3.5.0.min.js"></script>
+  {{!-- Jquery --}}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  {{!-- Owl carousel JS --}}
+  <script src="../../public/js/owl.carousel.min.js"></script>
+  <!-- Waypoints -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+  <!-- Main -->
+  <script src="../../public/js/main.js"></script>
+  {{!-- Script Bootstrap --}}
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  {{{_sections.js}}}
+</body>
+
+</html>

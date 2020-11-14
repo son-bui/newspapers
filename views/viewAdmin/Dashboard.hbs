@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+
+  {{!-- Font Awesome --}}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  {{!-- Fonts --}}
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  {{!-- Bootstrap CSS --}}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  {{!-- Animated --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.0/animate.min.css">
+  {{!-- Data table --}}
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+
+  <link rel="stylesheet" href="/public/assets/css/admin.css">
+  <link rel="stylesheet" href="/public/css/style_1.css">
+  <link rel="stylesheet" href="/public/assets/css/table.css">
+
+
+</head>
+
+<body>
+  <div class="container-fluid d-flex justify-content-center mt-3 mb-3">
+    <div class="main">
+      <div class="row h-100">
+        {{!-- Sidebar --}}
+        <section class="col-sm-12 col-lg-2 pl-0 pr-0">
+          {{!-- Sidebar PC --}}
+          <div class="sidebar-pc">
+            {{!-- Logo --}}
+            <div class="logo">
+              <a href="/" class="d-block">
+                <img src="/public/images/logo.png" alt="Image Logo">
+              </a>
+            </div>
+
+            {{!-- Navbar --}}
+            <nav class="w-100">
+              <ul class="list">
+                <li class="list-item">
+                  <a href="/admin" class="list-link active">
+                    <i class="fa fa-tachometer" aria-hidden="true"></i>
+                    Bảng điều khiển
+                  </a>
+                </li>
+                <li class="list-item">
+                  <a href="/admin/category" class="list-link">
+                    <i class="fa fa-list" aria-hidden="true"></i>
+                    Danh mục
+                  </a>
+                </li>
+                <li class="list-item">
+                  <a href="/admin/tags" class="list-link">
+                    <i class="fa fa-tags" aria-hidden="true"></i>
+                    Thẻ
+                  </a>
+                </li>
+                <li class="list-item">
+                  <a href="/admin/news" class="list-link">
+                    <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                    Bài viết
+                  </a>
+                </li>
+                <li class="list-item">
+                  <a href="/admin/users" class="list-link">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    Người dùng
+                  </a>
+                </li>
+                <li class="list-item">
+                  <a href="/admin/assign-category" class="list-link">
+                    <i class="fa fa-eyedropper" aria-hidden="true"></i>
+                    Phân công chuyên mục
+                  </a>
+                </li>
+                <li class="list-item">
+                  {{!-- Sign out --}}
+                  <form action="/Account/Logout" id="frmLogout" method="POST"></form>
+                  <a class="nav-link" href="javascript: $('#frmLogout').submit()">
+                    <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    Đăng xuất
+                  </a>
+                </li>
+              </ul>
+            </nav>
+
+            {{!-- Ads --}}
+            <div class="position-relative d-flex justify-content-center">
+              <div class="ads">
+                <img src="/public/images/flamenco-lets-get-out-of-here.png" alt="Image Ads">
+                <p>Upgrade to <span style="font-weight: bold;">Pro</span> now</p>
+                <a href="#" class="btn btn-success mt-2 mb-2">Upgrade</a>
+              </div>
+            </div>
+          </div>
+
+
+          {{!-- Sidebar Mobile --}}
+          <div class="sidebar-mobile">
+            {{!-- Logo --}}
+            <div class="logo">
+              <a href="/" class="d-block">
+                <img src="/public/images/logo.png" alt="Image Logo">
+              </a>
+            </div>
+
+            {{!-- Navbar --}}
+            <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+              <div class="container">
+                <a class="navbar-brand" href="/">
+                  <h3>Trang chủ</h3>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse position-relative" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a href="/admin" class="nav-link active">
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>
+                        Bảng điều khiển
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/category" class="nav-link">
+                        <i class="fa fa-list" aria-hidden="true"></i>
+                        Danh mục
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/tags" class="nav-link">
+                        <i class="fa fa-tags" aria-hidden="true"></i>
+                        Thẻ
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/news" class="nav-link">
+                        <i class="fa fa-newspaper-o" aria-hidden="true"></i>
+                        Bài viết
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="/admin/users" class="nav-link">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        Người dùng
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      {{!-- Sign out --}}
+                      <form action="/Account/Logout" id="frmLogout" method="POST"></form>
+                      <a class="nav-link" href="javascript: $('#frmLogout').submit()">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        Đăng xuất
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </section>
+
+        {{!-- Main content --}}
+        <section class="col-sm-12 col-lg-10 main-content">
+          {{!-- Main content PC --}}
+          <div class="container">
+            {{!-- Top bar --}}
+            <section class="top-bar-admin mb-4">
+              <h4>Bảng điều khiển</h4>
+              <form class="search-form my-2 my-lg-0" method="GET" action="/Category/search">
+                <input class="form-control mr-sm-2" type="text" name="Search" placeholder="Tìm kiếm">
+                <button class="btn-search" type="submit">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </form>
+            </section>
+
+            {{!-- Alert --}}
+            <section class="alert alert-danger banner" role="alert">
+              <div class="banner-left">
+                <h3>Chào mừng trở lại {{lcAuthUser.Name}}!</h3>
+                <p class="banner-text text-dark mt-4">
+                  Bạn đã đạt được <span class="parameter">80%</span> chỉ tiêu trong tuần.
+                </p>
+                <p class="banner-text text-dark mb-3">Hãy giữ vững kết quả và cải thiện nó.</p>
+              </div>
+              <div class="banner-right">
+                <img src="/public/images/marginalia-financial-report.png" alt="">
+              </div>
+            </section>
+
+            {{!-- Chart --}}
+            <section class="chart mb-4">
+              <div class="card text-left">
+                <div class="card-body">
+                  <canvas id="myChart"></canvas>
+                </div>
+              </div>
+            </section>
+
+            {{!-- Feature --}}
+            <section class="row feature">
+              <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-primary o-hidden h-100">
+                  <div class="card-body">
+                    <div class="card-body-icon">
+                      <i class="fa fa-fw fa-comments"></i>
+                    </div>
+                    <div class="title-feature-card">{{this.totalComment}} Bình luận!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-warning o-hidden h-100">
+                  <div class="card-body">
+                    <div class="card-body-icon">
+                      <i class="fa fa-fw fa-list"></i>
+                    </div>
+                    <div class="title-feature-card">{{this.totalNews}} Bài viết mới!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-success o-hidden h-100">
+                  <div class="card-body">
+                    <div class="card-body-icon">
+                      <i class="fa fa-fw fa-shopping-cart"></i>
+                    </div>
+                    <div class="title-feature-card">{{this.totalNewsPremium}} Tin tức cao cấp!</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-danger o-hidden h-100">
+                  <div class="card-body">
+                    <div class="card-body-icon">
+                      <i class="fa fa-fw fa-support"></i>
+                    </div>
+                    <div class="title-feature-card">{{this.totalSubscriber}} Đăng ký mới!</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+
+  {{!-- Bootstrap JS --}}
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  {{!-- Chart JS --}}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script src="/public/assets/js/admin.js"></script>
+
+  <script type="text/javascript">
+    localStorage.setItem("nViewInYearJson", {{ nViewInYearJson }})
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var lcStorage = localStorage.getItem("nViewInYearJson");
+    console.log("lcStorage", lcStorage);
+    var nNews = lcStorage.split(",");
+    var myChart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: [
+          "Tháng 1",
+          "Tháng 2",
+          "Tháng 3",
+          "Tháng 4",
+          "Tháng 5",
+          "Tháng 6",
+          "Tháng 7",
+          "Tháng 8",
+          "Tháng 9",
+          "Tháng 10",
+          "Tháng 11",
+          "Tháng 12",
+        ],
+        datasets: [
+          {
+            label: "Số lượt xem trong năm", // Name the series
+            data: nNews, // Specify the data values array
+            fill: false,
+            borderColor: "#2196f3", // Add custom color border (Line)
+            backgroundColor: "#2196f3", // Add custom color background (Points and Fill)
+            borderWidth: 1 // Specify bar border width
+          }
+        ]
+      },
+      options: {
+        responsive: true, // Instruct chart js to respond nicely.
+        maintainAspectRatio: false // Add to prevent default behaviour of full-width/height
+      }
+    });
+
+  </script>
+</body>
+
+</html>
